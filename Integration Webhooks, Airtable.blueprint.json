@@ -1,0 +1,801 @@
+{
+    "name": "Integration Webhooks, Airtable",
+    "flow": [
+        {
+            "id": 1,
+            "module": "gateway:CustomWebHook",
+            "version": 1,
+            "parameters": {
+                "hook": 2862707,
+                "maxResults": 1
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 0
+                },
+                "setupValidation": {
+                    "result": {
+                        "valid": true,
+                        "fields": []
+                    },
+                    "version": 1,
+                    "configuration": "eb5e0dc2a2d5468"
+                },
+                "restore": {
+                    "parameters": {
+                        "hook": {
+                            "data": {
+                                "editable": "true"
+                            },
+                            "label": "APROBACION SLACK"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "hook",
+                        "type": "hook:gateway-webhook",
+                        "label": "Webhook",
+                        "required": true
+                    },
+                    {
+                        "name": "maxResults",
+                        "type": "number",
+                        "label": "Maximum number of results"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 3,
+            "module": "airtable:ActionUpdateRecords",
+            "version": 3,
+            "parameters": {
+                "__IMTCONN__": 11264517
+            },
+            "mapper": {
+                "id": "{{1.recordId}}",
+                "base": "appeUvvuYwAlbbdin",
+                "table": "tblWIujV8QYLEm2G1",
+                "record": {
+                    "fldcUESVqh71uR8QS": "Esperando Aprobación Humana"
+                },
+                "typecast": false,
+                "useColumnId": false
+            },
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 0
+                },
+                "setupValidation": {
+                    "result": {
+                        "valid": true,
+                        "fields": []
+                    },
+                    "version": 1,
+                    "configuration": "3416e4a153442020"
+                },
+                "restore": {
+                    "expect": {
+                        "base": {
+                            "label": "TICKET SOPORTE TECNICO"
+                        },
+                        "table": {
+                            "label": "Tickets_Soporte"
+                        },
+                        "record": {
+                            "nested": {
+                                "fld9X61kWTbfXmqrA": {
+                                    "mode": "edit"
+                                },
+                                "fldcUESVqh71uR8QS": {
+                                    "mode": "chose",
+                                    "label": "Esperando Aprobación Humana"
+                                },
+                                "fldrcs6RA19U3Z1H9": {
+                                    "mode": "edit"
+                                },
+                                "flduIBIKARoC1mTzA": {
+                                    "mode": "chose"
+                                }
+                            }
+                        },
+                        "typecast": {
+                            "mode": "chose"
+                        },
+                        "useColumnId": {
+                            "mode": "chose"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "airtable3"
+                            },
+                            "label": "Romina's Airtable OAuth connection (User ID: usrIuXB2VC4q1wwnI)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:airtable3,airtable2",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "base",
+                        "type": "select",
+                        "label": "Base",
+                        "required": true
+                    },
+                    {
+                        "name": "typecast",
+                        "type": "boolean",
+                        "label": "Smart links",
+                        "required": true
+                    },
+                    {
+                        "name": "useColumnId",
+                        "type": "boolean",
+                        "label": "Use Column ID",
+                        "required": true
+                    },
+                    {
+                        "name": "table",
+                        "type": "select",
+                        "label": "Table",
+                        "required": true
+                    },
+                    {
+                        "name": "id",
+                        "type": "text",
+                        "label": "Record ID",
+                        "required": true
+                    },
+                    {
+                        "name": "record",
+                        "spec": [
+                            {
+                                "name": "flduIBIKARoC1mTzA",
+                                "spec": {
+                                    "name": "value",
+                                    "label": "Record ID"
+                                },
+                                "type": "array",
+                                "label": "Empresa"
+                            },
+                            {
+                                "name": "flddiVWpJeLAly0Bp",
+                                "type": "text",
+                                "label": "Email"
+                            },
+                            {
+                                "name": "fldYPBdwKYG6yHtjH",
+                                "type": "text",
+                                "label": "Asunto"
+                            },
+                            {
+                                "name": "fldFR9crHReDPZNSK",
+                                "type": "text",
+                                "label": "Descripcion_Problema"
+                            },
+                            {
+                                "mode": "edit",
+                                "name": "fld9X61kWTbfXmqrA",
+                                "type": "select",
+                                "label": "Analisis_Sentimiento"
+                            },
+                            {
+                                "mode": "edit",
+                                "name": "fldrcs6RA19U3Z1H9",
+                                "type": "select",
+                                "label": "Criticidad"
+                            },
+                            {
+                                "name": "fldSFz5efs9UsmTzH",
+                                "type": "text",
+                                "label": "Respuesta_IA"
+                            },
+                            {
+                                "mode": "edit",
+                                "name": "fldcUESVqh71uR8QS",
+                                "type": "select",
+                                "label": "Estado"
+                            },
+                            {
+                                "name": "fldfiIaX5Z46jKqjz",
+                                "type": "text",
+                                "label": "ID_Hilo_Gmail"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Record"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "id",
+                        "type": "text",
+                        "label": "ID"
+                    },
+                    {
+                        "name": "createdTime",
+                        "type": "date",
+                        "label": "Created Time"
+                    },
+                    {
+                        "name": "ID_Ticket",
+                        "type": "number",
+                        "label": "ID_Ticket"
+                    },
+                    {
+                        "name": "Empresa",
+                        "spec": {
+                            "label": "Record ID"
+                        },
+                        "type": "array",
+                        "label": "Empresa"
+                    },
+                    {
+                        "name": "Email",
+                        "type": "text",
+                        "label": "Email"
+                    },
+                    {
+                        "name": "Asunto",
+                        "type": "text",
+                        "label": "Asunto"
+                    },
+                    {
+                        "name": "Descripcion_Problema",
+                        "type": "text",
+                        "label": "Descripcion_Problema",
+                        "multiline": true
+                    },
+                    {
+                        "name": "Analisis_Sentimiento",
+                        "type": "text",
+                        "label": "Analisis_Sentimiento"
+                    },
+                    {
+                        "name": "Criticidad",
+                        "type": "text",
+                        "label": "Criticidad"
+                    },
+                    {
+                        "name": "Respuesta_IA",
+                        "type": "text",
+                        "label": "Respuesta_IA",
+                        "multiline": true
+                    },
+                    {
+                        "name": "Estado",
+                        "type": "text",
+                        "label": "Estado"
+                    },
+                    {
+                        "name": "ID_Hilo_Gmail",
+                        "type": "text",
+                        "label": "ID_Hilo_Gmail"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 4,
+            "module": "google-email:sendAnEmail",
+            "version": 4,
+            "parameters": {
+                "__IMTCONN__": 11061126
+            },
+            "mapper": {
+                "to": [
+                    "LIC.ROMINABURGOS@HOTMAIL.COM"
+                ],
+                "subject": "RESPUESTA TICKET SOPORTE",
+                "bodyType": "collection",
+                "contents": [
+                    {
+                        "text": "Estimado cliente, su caso de alta criticidad ha sido revisado de manera prioritaria y aprobado por nuestro equipo de supervisión. \nNos pondremos en contacto a la brevedad para acercarle la solución técnica definitiva. \nAtentamente, el equipo de soporte.",
+                        "image": {}
+                    }
+                ]
+            },
+            "metadata": {
+                "designer": {
+                    "x": 600,
+                    "y": 0
+                },
+                "setupValidation": {
+                    "result": {
+                        "valid": true,
+                        "fields": []
+                    },
+                    "version": 1,
+                    "configuration": "c40279e91177f286"
+                },
+                "restore": {
+                    "expect": {
+                        "cc": {
+                            "mode": "chose"
+                        },
+                        "to": {
+                            "mode": "chose",
+                            "items": [
+                                null
+                            ]
+                        },
+                        "bcc": {
+                            "mode": "chose"
+                        },
+                        "from": {
+                            "mode": "chose",
+                            "label": "Empty"
+                        },
+                        "bodyType": {
+                            "label": "Collection of contents (text, images, etc.)"
+                        },
+                        "contents": {
+                            "mode": "chose",
+                            "items": [
+                                null
+                            ]
+                        },
+                        "signature": {
+                            "mode": "chose",
+                            "label": "Empty"
+                        },
+                        "attachments": {
+                            "mode": "chose"
+                        },
+                        "emailHeaders": {
+                            "mode": "chose"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google-email"
+                            },
+                            "label": "Romina's Gmail connection (lic.rominaburgos@gmail.com)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:google-email",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "to",
+                        "spec": {
+                            "name": "value",
+                            "type": "email",
+                            "label": "Recipient email address",
+                            "required": true,
+                            "validate": true
+                        },
+                        "type": "array",
+                        "label": "To",
+                        "required": true
+                    },
+                    {
+                        "name": "subject",
+                        "type": "text",
+                        "label": "Subject"
+                    },
+                    {
+                        "name": "bodyType",
+                        "type": "select",
+                        "label": "Body type",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "rawHtml",
+                                "collection"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "attachments",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "filename",
+                                    "type": "filename",
+                                    "label": "File name",
+                                    "required": true,
+                                    "semantic": "file:name"
+                                },
+                                {
+                                    "name": "data",
+                                    "type": "buffer",
+                                    "label": "Data",
+                                    "required": true,
+                                    "semantic": "file:data"
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Attachment"
+                        },
+                        "type": "array",
+                        "label": "Attachments"
+                    },
+                    {
+                        "name": "from",
+                        "type": "select",
+                        "label": "From"
+                    },
+                    {
+                        "name": "cc",
+                        "spec": {
+                            "name": "value",
+                            "type": "email",
+                            "label": "Recipient email address"
+                        },
+                        "type": "array",
+                        "label": "CC recipients"
+                    },
+                    {
+                        "name": "bcc",
+                        "spec": {
+                            "name": "value",
+                            "type": "email",
+                            "label": "Recipient email address"
+                        },
+                        "type": "array",
+                        "label": "BCC recipients"
+                    },
+                    {
+                        "name": "emailHeaders",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "key",
+                                    "type": "text",
+                                    "label": "Key",
+                                    "required": true
+                                },
+                                {
+                                    "name": "value",
+                                    "type": "text",
+                                    "label": "Value"
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Email header"
+                        },
+                        "type": "array",
+                        "label": "Additional email headers"
+                    },
+                    {
+                        "name": "contents",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "text",
+                                    "type": "text",
+                                    "label": "Text"
+                                },
+                                {
+                                    "name": "image",
+                                    "spec": [
+                                        {
+                                            "name": "filename",
+                                            "type": "filename",
+                                            "label": "File name",
+                                            "semantic": "file:name"
+                                        },
+                                        {
+                                            "name": "data",
+                                            "type": "buffer",
+                                            "label": "Data",
+                                            "semantic": "file:data"
+                                        },
+                                        {
+                                            "name": "width",
+                                            "type": "uinteger",
+                                            "label": "Width"
+                                        },
+                                        {
+                                            "name": "height",
+                                            "type": "uinteger",
+                                            "label": "Height"
+                                        }
+                                    ],
+                                    "type": "collection",
+                                    "label": "Image"
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Content"
+                        },
+                        "type": "array",
+                        "label": "Body contents"
+                    },
+                    {
+                        "name": "signature",
+                        "type": "select",
+                        "label": "Signature content"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 5,
+            "module": "airtable:ActionUpdateRecords",
+            "version": 3,
+            "parameters": {
+                "__IMTCONN__": 11264517
+            },
+            "mapper": {
+                "id": "{{1.recordId}}",
+                "base": "appeUvvuYwAlbbdin",
+                "table": "tblWIujV8QYLEm2G1",
+                "record": {
+                    "fldcUESVqh71uR8QS": "Publicado / Resuelto"
+                },
+                "typecast": false,
+                "useColumnId": false
+            },
+            "metadata": {
+                "designer": {
+                    "x": 900,
+                    "y": 0
+                },
+                "setupValidation": {
+                    "result": {
+                        "valid": true,
+                        "fields": []
+                    },
+                    "version": 1,
+                    "configuration": "9f532e5323d2d7a0"
+                },
+                "restore": {
+                    "expect": {
+                        "base": {
+                            "label": "TICKET SOPORTE TECNICO"
+                        },
+                        "table": {
+                            "label": "Tickets_Soporte"
+                        },
+                        "record": {
+                            "nested": {
+                                "fld9X61kWTbfXmqrA": {
+                                    "mode": "edit"
+                                },
+                                "fldcUESVqh71uR8QS": {
+                                    "mode": "chose",
+                                    "label": "Publicado / Resuelto"
+                                },
+                                "fldrcs6RA19U3Z1H9": {
+                                    "mode": "edit"
+                                },
+                                "flduIBIKARoC1mTzA": {
+                                    "mode": "chose"
+                                }
+                            }
+                        },
+                        "typecast": {
+                            "mode": "chose"
+                        },
+                        "useColumnId": {
+                            "mode": "chose"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "airtable3"
+                            },
+                            "label": "Romina's Airtable OAuth connection (User ID: usrIuXB2VC4q1wwnI)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:airtable3,airtable2",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "base",
+                        "type": "select",
+                        "label": "Base",
+                        "required": true
+                    },
+                    {
+                        "name": "typecast",
+                        "type": "boolean",
+                        "label": "Smart links",
+                        "required": true
+                    },
+                    {
+                        "name": "useColumnId",
+                        "type": "boolean",
+                        "label": "Use Column ID",
+                        "required": true
+                    },
+                    {
+                        "name": "table",
+                        "type": "select",
+                        "label": "Table",
+                        "required": true
+                    },
+                    {
+                        "name": "id",
+                        "type": "text",
+                        "label": "Record ID",
+                        "required": true
+                    },
+                    {
+                        "name": "record",
+                        "spec": [
+                            {
+                                "name": "flduIBIKARoC1mTzA",
+                                "spec": {
+                                    "name": "value",
+                                    "label": "Record ID"
+                                },
+                                "type": "array",
+                                "label": "Empresa"
+                            },
+                            {
+                                "name": "flddiVWpJeLAly0Bp",
+                                "type": "text",
+                                "label": "Email"
+                            },
+                            {
+                                "name": "fldYPBdwKYG6yHtjH",
+                                "type": "text",
+                                "label": "Asunto"
+                            },
+                            {
+                                "name": "fldFR9crHReDPZNSK",
+                                "type": "text",
+                                "label": "Descripcion_Problema"
+                            },
+                            {
+                                "mode": "edit",
+                                "name": "fld9X61kWTbfXmqrA",
+                                "type": "select",
+                                "label": "Analisis_Sentimiento"
+                            },
+                            {
+                                "mode": "edit",
+                                "name": "fldrcs6RA19U3Z1H9",
+                                "type": "select",
+                                "label": "Criticidad"
+                            },
+                            {
+                                "name": "fldSFz5efs9UsmTzH",
+                                "type": "text",
+                                "label": "Respuesta_IA"
+                            },
+                            {
+                                "mode": "edit",
+                                "name": "fldcUESVqh71uR8QS",
+                                "type": "select",
+                                "label": "Estado"
+                            },
+                            {
+                                "name": "fldfiIaX5Z46jKqjz",
+                                "type": "text",
+                                "label": "ID_Hilo_Gmail"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Record"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "id",
+                        "type": "text",
+                        "label": "ID"
+                    },
+                    {
+                        "name": "createdTime",
+                        "type": "date",
+                        "label": "Created Time"
+                    },
+                    {
+                        "name": "ID_Ticket",
+                        "type": "number",
+                        "label": "ID_Ticket"
+                    },
+                    {
+                        "name": "Empresa",
+                        "spec": {
+                            "label": "Record ID"
+                        },
+                        "type": "array",
+                        "label": "Empresa"
+                    },
+                    {
+                        "name": "Email",
+                        "type": "text",
+                        "label": "Email"
+                    },
+                    {
+                        "name": "Asunto",
+                        "type": "text",
+                        "label": "Asunto"
+                    },
+                    {
+                        "name": "Descripcion_Problema",
+                        "type": "text",
+                        "label": "Descripcion_Problema",
+                        "multiline": true
+                    },
+                    {
+                        "name": "Analisis_Sentimiento",
+                        "type": "text",
+                        "label": "Analisis_Sentimiento"
+                    },
+                    {
+                        "name": "Criticidad",
+                        "type": "text",
+                        "label": "Criticidad"
+                    },
+                    {
+                        "name": "Respuesta_IA",
+                        "type": "text",
+                        "label": "Respuesta_IA",
+                        "multiline": true
+                    },
+                    {
+                        "name": "Estado",
+                        "type": "text",
+                        "label": "Estado"
+                    },
+                    {
+                        "name": "ID_Hilo_Gmail",
+                        "type": "text",
+                        "label": "ID_Hilo_Gmail"
+                    }
+                ]
+            }
+        }
+    ],
+    "metadata": {
+        "instant": true,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "us2.make.com",
+        "notes": []
+    }
+}

@@ -1,0 +1,2105 @@
+{
+    "name": "TICKET SOPORTE TECNICO -TRABAJO FINAL",
+    "flow": [
+        {
+            "id": 1,
+            "module": "google-email:triggerWatchNewEmails",
+            "version": 4,
+            "parameters": {
+                "from": "",
+                "size": {
+                    "unit": "M",
+                    "amount": null,
+                    "criteria": "larger"
+                },
+                "limit": 1,
+                "folder": "INBOX",
+                "format": "full",
+                "subject": "",
+                "criteria": "is:unread",
+                "markSeen": true,
+                "filterType": "simpleSearch",
+                "__IMTCONN__": 11061142,
+                "excludeWords": "",
+                "includeWords": "",
+                "hasAttachment": false
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 0
+                },
+                "setupValidation": {
+                    "result": {
+                        "valid": true,
+                        "fields": []
+                    },
+                    "version": 1,
+                    "configuration": "bd9085932146f4cf"
+                },
+                "restore": {
+                    "parameters": {
+                        "size": {
+                            "nested": {
+                                "unit": {
+                                    "label": "MB (megabytes)"
+                                },
+                                "criteria": {
+                                    "label": "Greater than"
+                                }
+                            }
+                        },
+                        "folder": {
+                            "label": "Inbox"
+                        },
+                        "format": {
+                            "label": "Full content"
+                        },
+                        "criteria": {
+                            "label": "Only unread messages"
+                        },
+                        "filterType": {
+                            "label": "Simple filter"
+                        },
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google-email"
+                            },
+                            "label": "Gmail oficial Clinica (lic.rominaburgos@gmail.com)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:google-email",
+                        "label": "Connection",
+                        "required": true
+                    },
+                    {
+                        "name": "filterType",
+                        "type": "select",
+                        "label": "Filter type",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "simpleSearch",
+                                "gmailSearch"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "format",
+                        "type": "select",
+                        "label": "Content format",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "full",
+                                "raw",
+                                "metadata",
+                                "minimal"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "folder",
+                        "type": "select",
+                        "label": "Folder",
+                        "required": true
+                    },
+                    {
+                        "name": "labelIds",
+                        "type": "select",
+                        "label": "Label"
+                    },
+                    {
+                        "name": "criteria",
+                        "type": "select",
+                        "label": "Criteria",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "all",
+                                "is:read",
+                                "is:unread"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "markSeen",
+                        "type": "boolean",
+                        "label": "Mark email message(s) as read when fetched"
+                    },
+                    {
+                        "name": "limit",
+                        "type": "uinteger",
+                        "label": "Limit",
+                        "required": true,
+                        "validate": {
+                            "max": 500
+                        }
+                    },
+                    {
+                        "name": "from",
+                        "type": "email",
+                        "label": "Sender email address"
+                    },
+                    {
+                        "name": "subject",
+                        "type": "text",
+                        "label": "Subject"
+                    },
+                    {
+                        "name": "includeWords",
+                        "type": "text",
+                        "label": "Has the words"
+                    },
+                    {
+                        "name": "excludeWords",
+                        "type": "text",
+                        "label": "Doesn't have"
+                    },
+                    {
+                        "name": "size",
+                        "spec": [
+                            {
+                                "name": "criteria",
+                                "type": "select",
+                                "label": "Criteria",
+                                "validate": {
+                                    "enum": [
+                                        "larger",
+                                        "smaller"
+                                    ]
+                                }
+                            },
+                            {
+                                "name": "amount",
+                                "type": "integer",
+                                "label": "Size",
+                                "validate": {
+                                    "min": 0
+                                }
+                            },
+                            {
+                                "name": "unit",
+                                "type": "select",
+                                "label": "Size unit",
+                                "validate": {
+                                    "enum": [
+                                        "M",
+                                        "K",
+                                        "bytes"
+                                    ]
+                                }
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Email size"
+                    },
+                    {
+                        "name": "hasAttachment",
+                        "type": "boolean",
+                        "label": "Only emails with attachments/media",
+                        "required": true
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "id",
+                        "type": "text",
+                        "label": "Message ID"
+                    },
+                    {
+                        "name": "threadId",
+                        "type": "text",
+                        "label": "Thread ID"
+                    },
+                    {
+                        "name": "internalDate",
+                        "type": "date",
+                        "label": "Date"
+                    },
+                    {
+                        "name": "subject",
+                        "type": "text",
+                        "label": "Subject",
+                        "condition": true
+                    },
+                    {
+                        "name": "fromName",
+                        "type": "text",
+                        "label": "From (name)",
+                        "condition": true
+                    },
+                    {
+                        "name": "fromEmail",
+                        "type": "text",
+                        "label": "From (email)",
+                        "condition": true
+                    },
+                    {
+                        "name": "to",
+                        "spec": {
+                            "spec": [
+                                {
+                                    "name": "name",
+                                    "type": "text",
+                                    "label": "Name"
+                                },
+                                {
+                                    "name": "email",
+                                    "type": "text",
+                                    "label": "Email"
+                                }
+                            ],
+                            "type": "collection"
+                        },
+                        "type": "array",
+                        "label": "To",
+                        "condition": true
+                    },
+                    {
+                        "name": "cc",
+                        "spec": [
+                            {
+                                "name": "email",
+                                "type": "email",
+                                "label": "Email"
+                            },
+                            {
+                                "name": "name",
+                                "type": "text",
+                                "label": "Name"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "CC",
+                        "condition": true
+                    },
+                    {
+                        "name": "bcc",
+                        "spec": [
+                            {
+                                "name": "email",
+                                "type": "email",
+                                "label": "Email"
+                            },
+                            {
+                                "name": "name",
+                                "type": "text",
+                                "label": "Name"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "BCC",
+                        "condition": true
+                    },
+                    {
+                        "name": "snippet",
+                        "type": "text",
+                        "label": "Snippet"
+                    },
+                    {
+                        "name": "fullTextBody",
+                        "type": "text",
+                        "label": "Full text body",
+                        "condition": true
+                    },
+                    {
+                        "name": "htmlBody",
+                        "type": "text",
+                        "label": "HTML body",
+                        "condition": true
+                    },
+                    {
+                        "name": "hasAttachment",
+                        "type": "boolean",
+                        "label": "Has attachment",
+                        "condition": true
+                    },
+                    {
+                        "name": "hasMedia",
+                        "type": "boolean",
+                        "label": "Has media",
+                        "condition": true
+                    },
+                    {
+                        "name": "sysFolders",
+                        "spec": [
+                            {
+                                "name": "id",
+                                "type": "text",
+                                "label": "System folder ID"
+                            },
+                            {
+                                "name": "name",
+                                "type": "text",
+                                "label": "System folder name"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "System folders"
+                    },
+                    {
+                        "name": "categoryFolders",
+                        "spec": [
+                            {
+                                "name": "id",
+                                "type": "text",
+                                "label": "Category folder ID"
+                            },
+                            {
+                                "name": "name",
+                                "type": "text",
+                                "label": "Category folder name"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Category folders"
+                    },
+                    {
+                        "name": "userLabelFolders",
+                        "spec": [
+                            {
+                                "name": "id",
+                                "type": "text",
+                                "label": "User label folder ID"
+                            },
+                            {
+                                "name": "name",
+                                "type": "text",
+                                "label": "User label folder name"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "User label folders"
+                    },
+                    {
+                        "name": "labelIds",
+                        "spec": {
+                            "type": "text"
+                        },
+                        "type": "array",
+                        "label": "Message folder IDs"
+                    },
+                    {
+                        "name": "headers",
+                        "spec": [
+                            {
+                                "name": "Delivered-To",
+                                "type": "text",
+                                "label": "Delivered-To"
+                            },
+                            {
+                                "name": "Received",
+                                "type": "text",
+                                "label": "Received"
+                            },
+                            {
+                                "name": "Date",
+                                "type": "text",
+                                "label": "Date (header)"
+                            },
+                            {
+                                "name": "X-Original-Sender",
+                                "type": "text"
+                            },
+                            {
+                                "name": "Reply-To",
+                                "type": "text"
+                            },
+                            {
+                                "name": "Subject",
+                                "type": "text",
+                                "label": "Subject"
+                            },
+                            {
+                                "name": "From",
+                                "type": "text",
+                                "label": "From"
+                            },
+                            {
+                                "name": "To",
+                                "type": "text",
+                                "label": "To"
+                            },
+                            {
+                                "name": "Message-ID",
+                                "type": "text",
+                                "label": "Message-ID"
+                            },
+                            {
+                                "name": "In-Reply-To",
+                                "type": "text",
+                                "label": "In-Reply-To"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Headers",
+                        "condition": true
+                    },
+                    {
+                        "name": "sizeEstimate",
+                        "type": "number",
+                        "label": "Size estimate"
+                    },
+                    {
+                        "name": "historyId",
+                        "type": "text",
+                        "label": "History ID"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 3,
+            "module": "airtable:ActionSearchRecords",
+            "version": 3,
+            "parameters": {
+                "__IMTCONN__": 11264517
+            },
+            "mapper": {
+                "base": "appeUvvuYwAlbbdin",
+                "view": "viwdB4DJgki1Pe81V",
+                "table": "tblPsIS1EVQRDq2xs",
+                "maxRecords": "1",
+                "useColumnId": false
+            },
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 0
+                },
+                "setupValidation": {
+                    "result": {
+                        "valid": true,
+                        "fields": []
+                    },
+                    "version": 1,
+                    "configuration": "7d60d2707b6cd7a7"
+                },
+                "restore": {
+                    "expect": {
+                        "base": {
+                            "mode": "chose",
+                            "label": "TICKET SOPORTE TECNICO"
+                        },
+                        "sort": {
+                            "mode": "chose"
+                        },
+                        "view": {
+                            "mode": "chose",
+                            "label": "CLIENTE EMPRESA"
+                        },
+                        "table": {
+                            "mode": "chose",
+                            "label": "Clientes_Empresas"
+                        },
+                        "fields": {
+                            "mode": "chose"
+                        },
+                        "useColumnId": {
+                            "mode": "chose"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "airtable3"
+                            },
+                            "label": "Romina's Airtable OAuth connection (User ID: usrIuXB2VC4q1wwnI)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:airtable3,airtable2",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "base",
+                        "type": "select",
+                        "label": "Base",
+                        "required": true
+                    },
+                    {
+                        "name": "useColumnId",
+                        "type": "boolean",
+                        "label": "Use Column ID",
+                        "required": true
+                    },
+                    {
+                        "name": "table",
+                        "type": "select",
+                        "label": "Table",
+                        "required": true
+                    },
+                    {
+                        "name": "formula",
+                        "type": "text",
+                        "label": "Formula"
+                    },
+                    {
+                        "name": "maxRecords",
+                        "type": "integer",
+                        "label": "Limit"
+                    },
+                    {
+                        "name": "sort",
+                        "spec": [
+                            {
+                                "name": "field",
+                                "type": "select",
+                                "label": "Field",
+                                "dynamic": true,
+                                "options": []
+                            },
+                            {
+                                "name": "direction",
+                                "type": "select",
+                                "label": "Direction",
+                                "options": [
+                                    {
+                                        "label": "Descending",
+                                        "value": "desc"
+                                    },
+                                    {
+                                        "label": "Ascending",
+                                        "value": "asc"
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Sort"
+                    },
+                    {
+                        "name": "view",
+                        "type": "select",
+                        "label": "View"
+                    },
+                    {
+                        "name": "fields",
+                        "type": "select",
+                        "label": "Output Fields",
+                        "multiple": true
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "__IMTLENGTH__",
+                        "type": "uinteger",
+                        "label": "Total number of bundles"
+                    },
+                    {
+                        "name": "__IMTINDEX__",
+                        "type": "uinteger",
+                        "label": "Bundle order position"
+                    },
+                    {
+                        "name": "id",
+                        "type": "text",
+                        "label": "ID"
+                    },
+                    {
+                        "name": "createdTime",
+                        "type": "date",
+                        "label": "Created Time"
+                    },
+                    {
+                        "name": "Nombre_Empresa",
+                        "type": "text",
+                        "label": "Nombre_Empresa"
+                    },
+                    {
+                        "name": "Dominio_Email",
+                        "type": "text",
+                        "label": "Dominio_Email"
+                    },
+                    {
+                        "name": "Tickets_Asociados",
+                        "spec": {
+                            "label": "Record ID"
+                        },
+                        "type": "array",
+                        "label": "Tickets_Asociados"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 8,
+            "module": "util:SetVariables",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "scope": "roundtrip",
+                "variables": [
+                    {
+                        "name": "CRITICIDAD",
+                        "value": "ALTA"
+                    },
+                    {
+                        "name": "SENTIMIENTO",
+                        "value": "ENOJADO"
+                    },
+                    {
+                        "name": "CATEGORIA",
+                        "value": "ERROR DE COBRO"
+                    }
+                ]
+            },
+            "metadata": {
+                "designer": {
+                    "x": 591,
+                    "y": 5
+                },
+                "setupValidation": {
+                    "result": {
+                        "valid": true,
+                        "fields": []
+                    },
+                    "version": 1,
+                    "configuration": "af837e4e7ee2e4eb"
+                },
+                "restore": {
+                    "expect": {
+                        "scope": {
+                            "label": "One cycle"
+                        },
+                        "variables": {
+                            "items": [
+                                null,
+                                null,
+                                null
+                            ]
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "variables",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "name",
+                                    "type": "text",
+                                    "label": "Variable name",
+                                    "required": true
+                                },
+                                {
+                                    "name": "value",
+                                    "type": "any",
+                                    "label": "Variable value"
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Variable"
+                        },
+                        "type": "array",
+                        "label": "Variables",
+                        "validate": {
+                            "unique": {
+                                "by": "name"
+                            },
+                            "minItems": 1
+                        }
+                    },
+                    {
+                        "name": "scope",
+                        "type": "select",
+                        "label": "Variable lifetime",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "roundtrip",
+                                "execution"
+                            ]
+                        }
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "CRITICIDAD",
+                        "type": "any",
+                        "label": "CRITICIDAD"
+                    },
+                    {
+                        "name": "SENTIMIENTO",
+                        "type": "any",
+                        "label": "SENTIMIENTO"
+                    },
+                    {
+                        "name": "CATEGORIA",
+                        "type": "any",
+                        "label": "CATEGORIA"
+                    }
+                ]
+            },
+            "onerror": [
+                {
+                    "id": 18,
+                    "module": "builtin:Resume",
+                    "version": 1,
+                    "parameters": {},
+                    "mapper": {
+                        "CRITICIDAD": "ALTA",
+                        "SENTIMIENTO": "ENOJADO",
+                        "CATEGORIA": "ERROR EN COBRO"
+                    },
+                    "metadata": {
+                        "designer": {
+                            "x": 891,
+                            "y": 155
+                        },
+                        "restore": {},
+                        "expect": [
+                            {
+                                "name": "CRITICIDAD",
+                                "type": "any"
+                            },
+                            {
+                                "name": "SENTIMIENTO",
+                                "type": "any"
+                            },
+                            {
+                                "name": "CATEGORIA",
+                                "type": "any"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "module": "airtable:ActionCreateRecord",
+            "version": 3,
+            "parameters": {
+                "__IMTCONN__": 11264517
+            },
+            "mapper": {
+                "base": "appeUvvuYwAlbbdin",
+                "table": "tblWIujV8QYLEm2G1",
+                "record": {
+                    "fld9X61kWTbfXmqrA": "Frustrado",
+                    "fldFR9crHReDPZNSK": "{{1.fullTextBody}}",
+                    "fldYPBdwKYG6yHtjH": "{{1.subject}}",
+                    "fldcUESVqh71uR8QS": "Pendiente",
+                    "flddiVWpJeLAly0Bp": "{{1.fromEmail}}",
+                    "fldfiIaX5Z46jKqjz": "{{1.threadId}}",
+                    "fldrcs6RA19U3Z1H9": "Alta",
+                    "flduIBIKARoC1mTzA": [
+                        "{{3.id}}"
+                    ]
+                },
+                "typecast": false,
+                "useColumnId": false
+            },
+            "metadata": {
+                "designer": {
+                    "x": 891,
+                    "y": -145
+                },
+                "setupValidation": {
+                    "result": {
+                        "valid": true,
+                        "fields": []
+                    },
+                    "version": 1,
+                    "configuration": "ca283f55af9d3135"
+                },
+                "restore": {
+                    "expect": {
+                        "base": {
+                            "label": "TICKET SOPORTE TECNICO"
+                        },
+                        "table": {
+                            "label": "Tickets_Soporte",
+                            "nested": [
+                                {
+                                    "name": "record",
+                                    "spec": [
+                                        {
+                                            "name": "flduIBIKARoC1mTzA",
+                                            "spec": {
+                                                "label": "Record ID"
+                                            },
+                                            "type": "array",
+                                            "label": "Empresa"
+                                        },
+                                        {
+                                            "name": "flddiVWpJeLAly0Bp",
+                                            "type": "text",
+                                            "label": "Email"
+                                        },
+                                        {
+                                            "name": "fldYPBdwKYG6yHtjH",
+                                            "type": "text",
+                                            "label": "Asunto"
+                                        },
+                                        {
+                                            "name": "fldFR9crHReDPZNSK",
+                                            "type": "text",
+                                            "label": "Descripcion_Problema",
+                                            "multiline": true
+                                        },
+                                        {
+                                            "mode": "edit",
+                                            "name": "fld9X61kWTbfXmqrA",
+                                            "type": "select",
+                                            "label": "Analisis_Sentimiento",
+                                            "dynamic": true,
+                                            "options": [
+                                                {
+                                                    "label": "Enojado",
+                                                    "value": "Enojado"
+                                                },
+                                                {
+                                                    "label": "Frustrado",
+                                                    "value": "Frustrado"
+                                                },
+                                                {
+                                                    "label": "Neutral",
+                                                    "value": "Neutral"
+                                                }
+                                            ],
+                                            "validate": false
+                                        },
+                                        {
+                                            "mode": "edit",
+                                            "name": "fldrcs6RA19U3Z1H9",
+                                            "type": "select",
+                                            "label": "Criticidad",
+                                            "dynamic": true,
+                                            "options": [
+                                                {
+                                                    "label": "Baja",
+                                                    "value": "Baja"
+                                                },
+                                                {
+                                                    "label": "Media",
+                                                    "value": "Media"
+                                                },
+                                                {
+                                                    "label": "Alta",
+                                                    "value": "Alta"
+                                                },
+                                                {
+                                                    "label": "Crítica",
+                                                    "value": "Crítica"
+                                                }
+                                            ],
+                                            "validate": false
+                                        },
+                                        {
+                                            "name": "fldSFz5efs9UsmTzH",
+                                            "type": "text",
+                                            "label": "Respuesta_IA",
+                                            "multiline": true
+                                        },
+                                        {
+                                            "mode": "edit",
+                                            "name": "fldcUESVqh71uR8QS",
+                                            "type": "select",
+                                            "label": "Estado",
+                                            "dynamic": true,
+                                            "options": [
+                                                {
+                                                    "label": "Pendiente",
+                                                    "value": "Pendiente"
+                                                },
+                                                {
+                                                    "label": "Procesado por IA",
+                                                    "value": "Procesado por IA"
+                                                },
+                                                {
+                                                    "label": "Esperando Aprobación Humana",
+                                                    "value": "Esperando Aprobación Humana"
+                                                },
+                                                {
+                                                    "label": "Publicado / Resuelto",
+                                                    "value": "Publicado / Resuelto"
+                                                },
+                                                {
+                                                    "label": "Error",
+                                                    "value": "Error"
+                                                }
+                                            ],
+                                            "validate": false
+                                        },
+                                        {
+                                            "name": "fldfiIaX5Z46jKqjz",
+                                            "type": "text",
+                                            "label": "ID_Hilo_Gmail"
+                                        }
+                                    ],
+                                    "type": "collection",
+                                    "label": "Record"
+                                }
+                            ]
+                        },
+                        "record": {
+                            "nested": {
+                                "fld9X61kWTbfXmqrA": {
+                                    "mode": "chose",
+                                    "label": "Frustrado"
+                                },
+                                "fldcUESVqh71uR8QS": {
+                                    "mode": "chose",
+                                    "label": "Pendiente"
+                                },
+                                "fldrcs6RA19U3Z1H9": {
+                                    "mode": "chose",
+                                    "label": "Alta"
+                                },
+                                "flduIBIKARoC1mTzA": {
+                                    "mode": "chose",
+                                    "items": [
+                                        null
+                                    ]
+                                }
+                            }
+                        },
+                        "typecast": {
+                            "mode": "chose"
+                        },
+                        "useColumnId": {
+                            "mode": "chose"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "airtable3"
+                            },
+                            "label": "Romina's Airtable OAuth connection (User ID: usrIuXB2VC4q1wwnI)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:airtable3,airtable2",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "base",
+                        "type": "select",
+                        "label": "Base",
+                        "required": true
+                    },
+                    {
+                        "name": "typecast",
+                        "type": "boolean",
+                        "label": "Smart links",
+                        "required": true
+                    },
+                    {
+                        "name": "useColumnId",
+                        "type": "boolean",
+                        "label": "Use Column ID",
+                        "required": true
+                    },
+                    {
+                        "name": "table",
+                        "type": "select",
+                        "label": "Table",
+                        "required": true
+                    },
+                    {
+                        "name": "record",
+                        "spec": [
+                            {
+                                "name": "flduIBIKARoC1mTzA",
+                                "spec": {
+                                    "name": "value",
+                                    "label": "Record ID"
+                                },
+                                "type": "array",
+                                "label": "Empresa"
+                            },
+                            {
+                                "name": "flddiVWpJeLAly0Bp",
+                                "type": "text",
+                                "label": "Email"
+                            },
+                            {
+                                "name": "fldYPBdwKYG6yHtjH",
+                                "type": "text",
+                                "label": "Asunto"
+                            },
+                            {
+                                "name": "fldFR9crHReDPZNSK",
+                                "type": "text",
+                                "label": "Descripcion_Problema"
+                            },
+                            {
+                                "mode": "edit",
+                                "name": "fld9X61kWTbfXmqrA",
+                                "type": "select",
+                                "label": "Analisis_Sentimiento"
+                            },
+                            {
+                                "mode": "edit",
+                                "name": "fldrcs6RA19U3Z1H9",
+                                "type": "select",
+                                "label": "Criticidad"
+                            },
+                            {
+                                "name": "fldSFz5efs9UsmTzH",
+                                "type": "text",
+                                "label": "Respuesta_IA"
+                            },
+                            {
+                                "mode": "edit",
+                                "name": "fldcUESVqh71uR8QS",
+                                "type": "select",
+                                "label": "Estado"
+                            },
+                            {
+                                "name": "fldfiIaX5Z46jKqjz",
+                                "type": "text",
+                                "label": "ID_Hilo_Gmail"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Record"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "id",
+                        "type": "text",
+                        "label": "ID"
+                    },
+                    {
+                        "name": "createdTime",
+                        "type": "date",
+                        "label": "Created Time"
+                    },
+                    {
+                        "name": "ID_Ticket",
+                        "type": "number",
+                        "label": "ID_Ticket"
+                    },
+                    {
+                        "name": "Empresa",
+                        "spec": {
+                            "label": "Record ID"
+                        },
+                        "type": "array",
+                        "label": "Empresa"
+                    },
+                    {
+                        "name": "Email",
+                        "type": "text",
+                        "label": "Email"
+                    },
+                    {
+                        "name": "Asunto",
+                        "type": "text",
+                        "label": "Asunto"
+                    },
+                    {
+                        "name": "Descripcion_Problema",
+                        "type": "text",
+                        "label": "Descripcion_Problema",
+                        "multiline": true
+                    },
+                    {
+                        "name": "Analisis_Sentimiento",
+                        "type": "text",
+                        "label": "Analisis_Sentimiento"
+                    },
+                    {
+                        "name": "Criticidad",
+                        "type": "text",
+                        "label": "Criticidad"
+                    },
+                    {
+                        "name": "Respuesta_IA",
+                        "type": "text",
+                        "label": "Respuesta_IA",
+                        "multiline": true
+                    },
+                    {
+                        "name": "Estado",
+                        "type": "text",
+                        "label": "Estado"
+                    },
+                    {
+                        "name": "ID_Hilo_Gmail",
+                        "type": "text",
+                        "label": "ID_Hilo_Gmail"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 9,
+            "module": "builtin:BasicRouter",
+            "version": 1,
+            "mapper": null,
+            "metadata": {
+                "designer": {
+                    "x": 1200,
+                    "y": 0
+                }
+            },
+            "routes": [
+                {
+                    "flow": [
+                        {
+                            "id": 11,
+                            "module": "slack:CreateMessage",
+                            "version": 4,
+                            "parameters": {
+                                "__IMTCONN__": 11061480
+                            },
+                            "filter": {
+                                "name": "CRITICIDAD ALTA/CRITICA",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{8.CRITICIDAD}}",
+                                            "b": "ALTA",
+                                            "o": "text:equal"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "text": "¡ATENCIÓN: TICKET CRÍTICO DETECTADO POR IA! \n• Asunto: {{1.subject}}• Detalle: {{1.snippet}}\n<https://make.com|¡HACER CLIC AQUÍ PARA APROBAR Y ENVIAR RESPUESTA!>",
+                                "parse": false,
+                                "mrkdwn": true,
+                                "channel": "#SOPORTE",
+                                "username": "IA Alerta Soporte.",
+                                "icon_emoji": ":warning:",
+                                "channelWType": "manualy"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1500,
+                                    "y": -300
+                                },
+                                "setupValidation": {
+                                    "result": {
+                                        "valid": true,
+                                        "fields": []
+                                    },
+                                    "version": 1,
+                                    "configuration": "f1fc132ec72daa70"
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "parse": {
+                                            "mode": "chose"
+                                        },
+                                        "mrkdwn": {
+                                            "mode": "chose"
+                                        },
+                                        "link_names": {
+                                            "mode": "chose"
+                                        },
+                                        "channelWType": {
+                                            "label": "Enter manually"
+                                        },
+                                        "unfurl_links": {
+                                            "mode": "chose"
+                                        },
+                                        "unfurl_media": {
+                                            "mode": "chose"
+                                        },
+                                        "reply_broadcast": {
+                                            "mode": "chose"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "slack2"
+                                            },
+                                            "label": "Romina's Slack (user) connection (iaclinica.slack.com - lic.rominaburgos)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:slack2,slack3",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "channelWType",
+                                        "type": "select",
+                                        "label": "Enter a channel ID or name",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "manualy",
+                                                "list"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "text",
+                                        "type": "text",
+                                        "label": "Text"
+                                    },
+                                    {
+                                        "name": "blocks",
+                                        "type": "text",
+                                        "label": "Blocks"
+                                    },
+                                    {
+                                        "name": "thread_ts",
+                                        "type": "text",
+                                        "label": "Thread message ID (time stamp)"
+                                    },
+                                    {
+                                        "name": "reply_broadcast",
+                                        "type": "boolean",
+                                        "label": "Reply broadcast"
+                                    },
+                                    {
+                                        "name": "link_names",
+                                        "type": "boolean",
+                                        "label": "Link names"
+                                    },
+                                    {
+                                        "name": "parse",
+                                        "type": "boolean",
+                                        "label": "Parse message text"
+                                    },
+                                    {
+                                        "name": "mrkdwn",
+                                        "type": "boolean",
+                                        "label": "Use markdown"
+                                    },
+                                    {
+                                        "name": "unfurl_links",
+                                        "type": "boolean",
+                                        "label": "Unfurl primarily text-based content"
+                                    },
+                                    {
+                                        "name": "unfurl_media",
+                                        "type": "boolean",
+                                        "label": "Unfurl media content"
+                                    },
+                                    {
+                                        "name": "icon_emoji",
+                                        "type": "text",
+                                        "label": "Icon emoji"
+                                    },
+                                    {
+                                        "name": "icon_url",
+                                        "type": "url",
+                                        "label": "Icon url"
+                                    },
+                                    {
+                                        "name": "username",
+                                        "type": "text",
+                                        "label": "User name"
+                                    },
+                                    {
+                                        "name": "channel",
+                                        "type": "text",
+                                        "label": "Channel ID or name",
+                                        "required": true
+                                    }
+                                ],
+                                "advanced": true
+                            }
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 14,
+                            "module": "airtable:ActionUpdateRecords",
+                            "version": 3,
+                            "parameters": {
+                                "__IMTCONN__": 11264517
+                            },
+                            "filter": {
+                                "name": "CRITICIDAD MEDIA/ BAJA",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{8.CRITICIDAD}}",
+                                            "b": "ALTA",
+                                            "o": "text:notequal:ci"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "id": "{{6.id}}",
+                                "base": "appeUvvuYwAlbbdin",
+                                "table": "tblWIujV8QYLEm2G1",
+                                "record": {
+                                    "fldcUESVqh71uR8QS": "Esperando Aprobación Humana"
+                                },
+                                "typecast": false,
+                                "useColumnId": false
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1515,
+                                    "y": 48
+                                },
+                                "setupValidation": {
+                                    "result": {
+                                        "valid": true,
+                                        "fields": []
+                                    },
+                                    "version": 1,
+                                    "configuration": "39a9649683c6dff2"
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "base": {
+                                            "label": "TICKET SOPORTE TECNICO"
+                                        },
+                                        "table": {
+                                            "label": "Tickets_Soporte"
+                                        },
+                                        "record": {
+                                            "nested": {
+                                                "fld9X61kWTbfXmqrA": {
+                                                    "mode": "edit"
+                                                },
+                                                "fldcUESVqh71uR8QS": {
+                                                    "mode": "chose",
+                                                    "label": "Esperando Aprobación Humana"
+                                                },
+                                                "fldrcs6RA19U3Z1H9": {
+                                                    "mode": "edit"
+                                                },
+                                                "flduIBIKARoC1mTzA": {
+                                                    "mode": "chose"
+                                                }
+                                            }
+                                        },
+                                        "typecast": {
+                                            "mode": "chose"
+                                        },
+                                        "useColumnId": {
+                                            "mode": "chose"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "airtable3"
+                                            },
+                                            "label": "Romina's Airtable OAuth connection (User ID: usrIuXB2VC4q1wwnI)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:airtable3,airtable2",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "base",
+                                        "type": "select",
+                                        "label": "Base",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "typecast",
+                                        "type": "boolean",
+                                        "label": "Smart links",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "useColumnId",
+                                        "type": "boolean",
+                                        "label": "Use Column ID",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "table",
+                                        "type": "select",
+                                        "label": "Table",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "id",
+                                        "type": "text",
+                                        "label": "Record ID",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "record",
+                                        "spec": [
+                                            {
+                                                "name": "flduIBIKARoC1mTzA",
+                                                "spec": {
+                                                    "name": "value",
+                                                    "label": "Record ID"
+                                                },
+                                                "type": "array",
+                                                "label": "Empresa"
+                                            },
+                                            {
+                                                "name": "flddiVWpJeLAly0Bp",
+                                                "type": "text",
+                                                "label": "Email"
+                                            },
+                                            {
+                                                "name": "fldYPBdwKYG6yHtjH",
+                                                "type": "text",
+                                                "label": "Asunto"
+                                            },
+                                            {
+                                                "name": "fldFR9crHReDPZNSK",
+                                                "type": "text",
+                                                "label": "Descripcion_Problema"
+                                            },
+                                            {
+                                                "mode": "edit",
+                                                "name": "fld9X61kWTbfXmqrA",
+                                                "type": "select",
+                                                "label": "Analisis_Sentimiento"
+                                            },
+                                            {
+                                                "mode": "edit",
+                                                "name": "fldrcs6RA19U3Z1H9",
+                                                "type": "select",
+                                                "label": "Criticidad"
+                                            },
+                                            {
+                                                "name": "fldSFz5efs9UsmTzH",
+                                                "type": "text",
+                                                "label": "Respuesta_IA"
+                                            },
+                                            {
+                                                "mode": "edit",
+                                                "name": "fldcUESVqh71uR8QS",
+                                                "type": "select",
+                                                "label": "Estado"
+                                            },
+                                            {
+                                                "name": "fldfiIaX5Z46jKqjz",
+                                                "type": "text",
+                                                "label": "ID_Hilo_Gmail"
+                                            }
+                                        ],
+                                        "type": "collection",
+                                        "label": "Record"
+                                    }
+                                ],
+                                "interface": [
+                                    {
+                                        "name": "id",
+                                        "type": "text",
+                                        "label": "ID"
+                                    },
+                                    {
+                                        "name": "createdTime",
+                                        "type": "date",
+                                        "label": "Created Time"
+                                    },
+                                    {
+                                        "name": "ID_Ticket",
+                                        "type": "number",
+                                        "label": "ID_Ticket"
+                                    },
+                                    {
+                                        "name": "Empresa",
+                                        "spec": {
+                                            "label": "Record ID"
+                                        },
+                                        "type": "array",
+                                        "label": "Empresa"
+                                    },
+                                    {
+                                        "name": "Email",
+                                        "type": "text",
+                                        "label": "Email"
+                                    },
+                                    {
+                                        "name": "Asunto",
+                                        "type": "text",
+                                        "label": "Asunto"
+                                    },
+                                    {
+                                        "name": "Descripcion_Problema",
+                                        "type": "text",
+                                        "label": "Descripcion_Problema",
+                                        "multiline": true
+                                    },
+                                    {
+                                        "name": "Analisis_Sentimiento",
+                                        "type": "text",
+                                        "label": "Analisis_Sentimiento"
+                                    },
+                                    {
+                                        "name": "Criticidad",
+                                        "type": "text",
+                                        "label": "Criticidad"
+                                    },
+                                    {
+                                        "name": "Respuesta_IA",
+                                        "type": "text",
+                                        "label": "Respuesta_IA",
+                                        "multiline": true
+                                    },
+                                    {
+                                        "name": "Estado",
+                                        "type": "text",
+                                        "label": "Estado"
+                                    },
+                                    {
+                                        "name": "ID_Hilo_Gmail",
+                                        "type": "text",
+                                        "label": "ID_Hilo_Gmail"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 16,
+                            "module": "google-email:sendAnEmail",
+                            "version": 4,
+                            "parameters": {
+                                "__IMTCONN__": 11061126
+                            },
+                            "mapper": {
+                                "to": [
+                                    "{{1.fromEmail}}"
+                                ],
+                                "from": "\"Romina Burgos\" <lic.rominaburgos@gmail.com>",
+                                "subject": "{{1.subject}}",
+                                "bodyType": "collection",
+                                "contents": [
+                                    {
+                                        "text": "Estimado cliente, hemos recibido su ticket de soporte técnico de forma exitosa. Nuestro equipo ya se encuentra trabajando en la solución del inconveniente reportado.",
+                                        "image": {}
+                                    }
+                                ]
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1821,
+                                    "y": 44
+                                },
+                                "setupValidation": {
+                                    "result": {
+                                        "valid": true,
+                                        "fields": []
+                                    },
+                                    "version": 1,
+                                    "configuration": "8a199d1bb1abe866"
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "cc": {
+                                            "mode": "chose"
+                                        },
+                                        "to": {
+                                            "mode": "chose",
+                                            "items": [
+                                                null
+                                            ]
+                                        },
+                                        "bcc": {
+                                            "mode": "chose"
+                                        },
+                                        "from": {
+                                            "mode": "chose",
+                                            "label": "\"Romina Burgos\" <lic.rominaburgos@gmail.com>"
+                                        },
+                                        "bodyType": {
+                                            "label": "Collection of contents (text, images, etc.)"
+                                        },
+                                        "contents": {
+                                            "mode": "chose",
+                                            "items": [
+                                                null
+                                            ]
+                                        },
+                                        "signature": {
+                                            "mode": "chose",
+                                            "label": "Empty"
+                                        },
+                                        "attachments": {
+                                            "mode": "chose"
+                                        },
+                                        "emailHeaders": {
+                                            "mode": "chose"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google-email"
+                                            },
+                                            "label": "Romina's Gmail connection (lic.rominaburgos@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:google-email",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "to",
+                                        "spec": {
+                                            "name": "value",
+                                            "type": "email",
+                                            "label": "Recipient email address",
+                                            "required": true,
+                                            "validate": true
+                                        },
+                                        "type": "array",
+                                        "label": "To",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "subject",
+                                        "type": "text",
+                                        "label": "Subject"
+                                    },
+                                    {
+                                        "name": "bodyType",
+                                        "type": "select",
+                                        "label": "Body type",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "rawHtml",
+                                                "collection"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "attachments",
+                                        "spec": {
+                                            "name": "value",
+                                            "spec": [
+                                                {
+                                                    "name": "filename",
+                                                    "type": "filename",
+                                                    "label": "File name",
+                                                    "required": true,
+                                                    "semantic": "file:name"
+                                                },
+                                                {
+                                                    "name": "data",
+                                                    "type": "buffer",
+                                                    "label": "Data",
+                                                    "required": true,
+                                                    "semantic": "file:data"
+                                                }
+                                            ],
+                                            "type": "collection",
+                                            "label": "Attachment"
+                                        },
+                                        "type": "array",
+                                        "label": "Attachments"
+                                    },
+                                    {
+                                        "name": "from",
+                                        "type": "select",
+                                        "label": "From"
+                                    },
+                                    {
+                                        "name": "cc",
+                                        "spec": {
+                                            "name": "value",
+                                            "type": "email",
+                                            "label": "Recipient email address"
+                                        },
+                                        "type": "array",
+                                        "label": "CC recipients"
+                                    },
+                                    {
+                                        "name": "bcc",
+                                        "spec": {
+                                            "name": "value",
+                                            "type": "email",
+                                            "label": "Recipient email address"
+                                        },
+                                        "type": "array",
+                                        "label": "BCC recipients"
+                                    },
+                                    {
+                                        "name": "emailHeaders",
+                                        "spec": {
+                                            "name": "value",
+                                            "spec": [
+                                                {
+                                                    "name": "key",
+                                                    "type": "text",
+                                                    "label": "Key",
+                                                    "required": true
+                                                },
+                                                {
+                                                    "name": "value",
+                                                    "type": "text",
+                                                    "label": "Value"
+                                                }
+                                            ],
+                                            "type": "collection",
+                                            "label": "Email header"
+                                        },
+                                        "type": "array",
+                                        "label": "Additional email headers"
+                                    },
+                                    {
+                                        "name": "contents",
+                                        "spec": {
+                                            "name": "value",
+                                            "spec": [
+                                                {
+                                                    "name": "text",
+                                                    "type": "text",
+                                                    "label": "Text"
+                                                },
+                                                {
+                                                    "name": "image",
+                                                    "spec": [
+                                                        {
+                                                            "name": "filename",
+                                                            "type": "filename",
+                                                            "label": "File name",
+                                                            "semantic": "file:name"
+                                                        },
+                                                        {
+                                                            "name": "data",
+                                                            "type": "buffer",
+                                                            "label": "Data",
+                                                            "semantic": "file:data"
+                                                        },
+                                                        {
+                                                            "name": "width",
+                                                            "type": "uinteger",
+                                                            "label": "Width"
+                                                        },
+                                                        {
+                                                            "name": "height",
+                                                            "type": "uinteger",
+                                                            "label": "Height"
+                                                        }
+                                                    ],
+                                                    "type": "collection",
+                                                    "label": "Image"
+                                                }
+                                            ],
+                                            "type": "collection",
+                                            "label": "Content"
+                                        },
+                                        "type": "array",
+                                        "label": "Body contents"
+                                    },
+                                    {
+                                        "name": "signature",
+                                        "type": "select",
+                                        "label": "Signature content"
+                                    }
+                                ],
+                                "advanced": true
+                            }
+                        },
+                        {
+                            "id": 17,
+                            "module": "airtable:ActionUpdateRecords",
+                            "version": 3,
+                            "parameters": {
+                                "__IMTCONN__": 11264517
+                            },
+                            "mapper": {
+                                "id": "{{6.id}}",
+                                "base": "appeUvvuYwAlbbdin",
+                                "table": "tblWIujV8QYLEm2G1",
+                                "record": {
+                                    "fldcUESVqh71uR8QS": "Publicado / Resuelto"
+                                },
+                                "typecast": false,
+                                "useColumnId": false
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 2126,
+                                    "y": 38
+                                },
+                                "setupValidation": {
+                                    "result": {
+                                        "valid": true,
+                                        "fields": []
+                                    },
+                                    "version": 1,
+                                    "configuration": "8aaae078b4401fc2"
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "base": {
+                                            "label": "TICKET SOPORTE TECNICO"
+                                        },
+                                        "table": {
+                                            "label": "Tickets_Soporte"
+                                        },
+                                        "record": {
+                                            "nested": {
+                                                "fld9X61kWTbfXmqrA": {
+                                                    "mode": "edit"
+                                                },
+                                                "fldcUESVqh71uR8QS": {
+                                                    "mode": "chose",
+                                                    "label": "Publicado / Resuelto"
+                                                },
+                                                "fldrcs6RA19U3Z1H9": {
+                                                    "mode": "edit"
+                                                },
+                                                "flduIBIKARoC1mTzA": {
+                                                    "mode": "chose"
+                                                }
+                                            }
+                                        },
+                                        "typecast": {
+                                            "mode": "chose"
+                                        },
+                                        "useColumnId": {
+                                            "mode": "chose"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "airtable3"
+                                            },
+                                            "label": "Romina's Airtable OAuth connection (User ID: usrIuXB2VC4q1wwnI)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:airtable3,airtable2",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "base",
+                                        "type": "select",
+                                        "label": "Base",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "typecast",
+                                        "type": "boolean",
+                                        "label": "Smart links",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "useColumnId",
+                                        "type": "boolean",
+                                        "label": "Use Column ID",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "table",
+                                        "type": "select",
+                                        "label": "Table",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "id",
+                                        "type": "text",
+                                        "label": "Record ID",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "record",
+                                        "spec": [
+                                            {
+                                                "name": "flduIBIKARoC1mTzA",
+                                                "spec": {
+                                                    "name": "value",
+                                                    "label": "Record ID"
+                                                },
+                                                "type": "array",
+                                                "label": "Empresa"
+                                            },
+                                            {
+                                                "name": "flddiVWpJeLAly0Bp",
+                                                "type": "text",
+                                                "label": "Email"
+                                            },
+                                            {
+                                                "name": "fldYPBdwKYG6yHtjH",
+                                                "type": "text",
+                                                "label": "Asunto"
+                                            },
+                                            {
+                                                "name": "fldFR9crHReDPZNSK",
+                                                "type": "text",
+                                                "label": "Descripcion_Problema"
+                                            },
+                                            {
+                                                "mode": "edit",
+                                                "name": "fld9X61kWTbfXmqrA",
+                                                "type": "select",
+                                                "label": "Analisis_Sentimiento"
+                                            },
+                                            {
+                                                "mode": "edit",
+                                                "name": "fldrcs6RA19U3Z1H9",
+                                                "type": "select",
+                                                "label": "Criticidad"
+                                            },
+                                            {
+                                                "name": "fldSFz5efs9UsmTzH",
+                                                "type": "text",
+                                                "label": "Respuesta_IA"
+                                            },
+                                            {
+                                                "mode": "edit",
+                                                "name": "fldcUESVqh71uR8QS",
+                                                "type": "select",
+                                                "label": "Estado"
+                                            },
+                                            {
+                                                "name": "fldfiIaX5Z46jKqjz",
+                                                "type": "text",
+                                                "label": "ID_Hilo_Gmail"
+                                            }
+                                        ],
+                                        "type": "collection",
+                                        "label": "Record"
+                                    }
+                                ],
+                                "interface": [
+                                    {
+                                        "name": "id",
+                                        "type": "text",
+                                        "label": "ID"
+                                    },
+                                    {
+                                        "name": "createdTime",
+                                        "type": "date",
+                                        "label": "Created Time"
+                                    },
+                                    {
+                                        "name": "ID_Ticket",
+                                        "type": "number",
+                                        "label": "ID_Ticket"
+                                    },
+                                    {
+                                        "name": "Empresa",
+                                        "spec": {
+                                            "label": "Record ID"
+                                        },
+                                        "type": "array",
+                                        "label": "Empresa"
+                                    },
+                                    {
+                                        "name": "Email",
+                                        "type": "text",
+                                        "label": "Email"
+                                    },
+                                    {
+                                        "name": "Asunto",
+                                        "type": "text",
+                                        "label": "Asunto"
+                                    },
+                                    {
+                                        "name": "Descripcion_Problema",
+                                        "type": "text",
+                                        "label": "Descripcion_Problema",
+                                        "multiline": true
+                                    },
+                                    {
+                                        "name": "Analisis_Sentimiento",
+                                        "type": "text",
+                                        "label": "Analisis_Sentimiento"
+                                    },
+                                    {
+                                        "name": "Criticidad",
+                                        "type": "text",
+                                        "label": "Criticidad"
+                                    },
+                                    {
+                                        "name": "Respuesta_IA",
+                                        "type": "text",
+                                        "label": "Respuesta_IA",
+                                        "multiline": true
+                                    },
+                                    {
+                                        "name": "Estado",
+                                        "type": "text",
+                                        "label": "Estado"
+                                    },
+                                    {
+                                        "name": "ID_Hilo_Gmail",
+                                        "type": "text",
+                                        "label": "ID_Hilo_Gmail"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "metadata": {
+        "instant": false,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "us2.make.com",
+        "notes": []
+    }
+}
